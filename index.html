@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Khai báo các thông tin cơ bản cho trang web -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phạm Ánh Hồng 3D</title>
+   
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Cài đặt cho thẻ body, để trang web được hiển thị giữa màn hình */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Đảm bảo body chiếm ít nhất 100% chiều cao của màn hình */
+    background: url(0bc030803dc18816b398e611d09ceaa6.gif); /* Sử dụng hình nền từ tệp background.jpg */
+    background-size: cover; /* Chỉnh kích thước hình nền để nó phủ toàn bộ body */
+}
+
+.box {
+    /* Cài đặt cho hộp chứa ảnh 3D */
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d; /* Bảo toàn kiểu biến đổi 3D */
+    transform: perspective(1000px) rotateY(0deg);  /*Tạo hiệu ứng 3D với góc nhìn 1000px và xoay theo trục Y */
+    /*animation: animate 20s linear infinite;*/ 
+    /* Ghi chú: Dòng này đã bị comment, có thể được sử dụng để tạo hiệu ứng quay tự động */
+}
+
+.box span {
+    /* Cài đặt cho các phần tử con của hộp (.box), chứa ảnh và tạo hiệu ứng 3D cho mỗi ảnh */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center; /* Xác định điểm xoay tại trung tâm */
+    transform-style: preserve-3d; /* Bảo toàn kiểu biến đổi 3D */
+    transform: rotateY(calc(var(--i)* 45deg )) translateZ(400px); /* Xoay ảnh và di chuyển nó theo trục Z */
+    -webkit-box-reflect: below 0px linear-gradient(transparent,transparent, #0004); /* Tạo hiệu ứng đổ bóng ở dưới */
+}
+
+.box span img {
+    /* Cài đặt cho các ảnh trong các phần tử con (span) của hộp (.box) */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo ảnh không bị méo khi căn chỉnh kích thước */
+}
+</style>
+<body>
+    <!-- Hộp chứa ảnh -->
+    <div class="box">
+        <!-- Các phần tử con (span) chứa ảnh với thuộc tính --i để xác định vị trí quay của ảnh -->
+        <span style="--i:1;"><img src="image6.jpg" alt=""></span>
+        <span style="--i:2;"><img src="image4.jpg" alt=""></span>
+        <span style="--i:3;"><img src="image8.jpg" alt=""></span>
+        <span style="--i:4;"><img src="image5.jpg" alt=""></span>
+        <span style="--i:5;"><img src="image3.jpg" alt=""></span>
+        <span style="--i:6;"><img src="image2.jpg" alt=""></span>
+        <span style="--i:7;"><img src="image7.jpg" alt=""></span>
+        <span style="--i:8;"><img src="image1.jpg" alt=""></span>
+    </div>
+
+    <!-- Script JavaScript để điều khiển hiệu ứng quay của hộp -->
+    <script type="text/javascript">
+        let box = document.querySelector('.box');
+        window.onmousemove = function(e){
+            let x = e.clientX/3; /* Lấy vị trí của con trỏ chuột và chia cho 3 để giảm độ quay */
+            box.style.transform = "perspective(1000px) rotateY(" + x + "deg)"; /* Áp dụng hiệu ứng quay theo trục Y */
+        }
+    </script>
+</body>
+</html>
